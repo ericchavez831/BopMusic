@@ -11,3 +11,7 @@ text-align: center;
 body {
 background-color: gray;
 }
+
+.text-center{
+    text-align: center;
+}
