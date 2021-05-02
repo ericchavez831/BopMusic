@@ -11,9 +11,20 @@ app.use(express.urlencoded({extended:true})); // to decode parameters that was s
 
 //routes
 app.get("/", async function(req, res){
-  res.render("partials/header");
-});
+  res.render("welcome");
+}); // root route
 
+app.get("/login", async function(req, res){
+  res.render("login");
+}); // login
+
+app.get("/signup", async function(req, res){
+  res.render("signup");
+}); // sign up
+
+app.get("/home", async function(req, res){
+  res.render("home");
+}); // home
 
 //functions
 async function executeSQL(sql, params){
