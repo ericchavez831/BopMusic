@@ -82,6 +82,11 @@ app.post("/login", async function(req, res){
   }
 });
 
+app.get("/logout", function(req, res) {
+  req.session.destroy()
+  res.redirect("/")
+})
+
 
 //functions
 async function checkDuplicate(username){
