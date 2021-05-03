@@ -54,21 +54,7 @@ app.post("/signup", async function(req, res){
 
 }); // user/new
 
-async function checkDuplicate(username){
-  let sql = 'SELECT * FROM q_users WHERE username = ?';
-  let rows = await executeSQL(sql, [username]);
-  console.log(rows);
-  // if the length is greater than 0, it means that the user was found
-  if(rows.length > 0){
-    console.log("Returned True");
-    return true;
-  }else{
-    console.log("Returned False");
-    return false;
-  }
-}
-
-app.get("/home", async function(req, res){
+app.get("/home", isAuthenticated, async function(req, res){
   res.render("home");
 }); // home
 
@@ -98,6 +84,30 @@ app.post("/login", async function(req, res){
 
 
 //functions
+async function checkDuplicate(username){
+  let sql = 'SELECT * FROM q_users WHERE username = ?';
+  let rows = await executeSQL(sql, [username]);
+  console.log(rows);
+  // if the length is greater than 0, it means that the user was found
+  if(rows.length > 0){
+    console.log("Returned True");
+    return true;
+  }else{
+    console.log("Returned False");
+    return false;
+  }
+}
+
+function isAuthenticated(req, res, next){
+  if(!req.session.authenicated){
+    res.redirect('/');
+    // user is not authenticated
+  }
+  else{
+    next();
+  }
+}
+
 async function executeSQL(sql, params){
   return new Promise (function (resolve, reject) {
     pool.query(sql, params, function (err, rows, fields) {
