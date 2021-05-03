@@ -10,14 +10,18 @@
 <body>
 <h1 class="text-center">Sign Up</h1>
 
-    <form>
+    <form method="POST" action="/signup">
         <div class="text-center">
-        <input type="text" placeholder="Name"> <br>
-        <input type="text" placeholder="Username"> <br>
-        <input type="password" placeholder="Password"> <br>
+        <input type="text" name="name" placeholder="Name"> <br>
+        <input type="text" name="username" placeholder="Username"> <br>
+        <input type="password" name="password" placeholder="Password"> <br>
         <button>Sign Up</button>
         </div>
     </form>
+
+    <% if(typeof error != 'undefined'){%>
+        <%= error %>
+    <% } %>
 
 </body>
 </html>
