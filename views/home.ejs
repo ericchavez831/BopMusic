@@ -13,14 +13,17 @@
     <nav>
       <h2>Navigate</h2>
       <ul>
-        <li><a href="home.ejs">Home</a></li>
+        <li><a href="index.ejs">Home</a></li>
         <li><a href="create.ejs">Create</a></li>
-        <li><a href="#">Explore</a></li>
-        <li><a href="#">Profile</a></li>
+        <li><a href="explore.ejs">Explore</a></li>
+        <li><a href="profile.ejs">Profile</a></li>
       </ul>
     </nav>
 
     <!-- Title/Heading -->
+    <header>
+      <h1>Activity Planner</h1>
+    </header>
     <h1>My Activities</h1>
 
     <!-- All playlists
@@ -41,24 +44,5 @@
       <span id="table"></span>
     </div>
     
-
-    <script>
-      
-      $("#closeBtn").hide();
-      
-      // show table
-      $("#loadList").on("click", showSongs);
-      function showSongs(){
-        $("#table").show();
-        $("#closeBtn").show();
-        $("#table").html("hi");
-      }
-
-      // close table
-      $("#closeBtn").on("click", function(){
-        $("#table").hide();
-        $("#closeBtn").hide();
-      });
-    </script>
   </body>
 </html>
