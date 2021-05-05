@@ -68,36 +68,24 @@ app.post("/signup", async function(req, res){
 
 }); // user/new
 
-app.get("/home", isAuthenticated, async function(req, res){
+app.get("/home", async function(req, res){
   res.render("home");
 }); // home
 
+app.get("/create", async function(req, res){
+  res.render("create");
+}); // create
 
-app.post("/login", async function(req, res){
-  let username = req.body.username;
-  let password = req.body.password;
-  let hashedPwd = '';
+app.get("/explore", async function(req, res){
+  res.render("explore");
+}); // explore
 
-  let sql = 'SELECT * FROM q_users WHERE username = ?';
-  let rows = await executeSQL(sql, [username]);
+app.get("/profile", async function(req, res){
+  res.render("profile");
+}); // profile
 
-  if(rows.length > 0){
-    hashedPwd = rows[0].password;
-  }
 
-  let pwdMatch = await bcrypt.compare(password, hashedPwd);
-  
-  if(pwdMatch){
-    req.session.authenticated = true;
-    console.log(req.session.authenticated);
-    res.render('home');
-  }
-  else{
-    res.render('login', {'error':'wrong credentials'});
-  }
-});
-
-// app.post("/api/login", async function(req, res){
+// app.post("/login", async function(req, res){
 //   let username = req.body.username;
 //   let password = req.body.password;
 //   let hashedPwd = '';
@@ -111,14 +99,38 @@ app.post("/login", async function(req, res){
 
 //   let pwdMatch = await bcrypt.compare(password, hashedPwd);
   
-//   if (pwdMatch) {
+//   if(pwdMatch){
 //     req.session.authenticated = true;
 //     console.log(req.session.authenticated);
-//     res.send({"authentication":"success"}); 
-//  } else {
-//    res.send({"authentication":"fail"}); 
-//  }
+//     res.render('home');
+//   }
+//   else{
+//     res.render('login', {'error':'wrong credentials'});
+//   }
 // });
+
+app.post("/api/login", async function(req, res){
+  let username = req.body.username;
+  let password = req.body.password;
+  let hashedPwd = '';
+
+  let sql = 'SELECT * FROM q_users WHERE username = ?';
+  let rows = await executeSQL(sql, [username]);
+
+  if(rows.length > 0){
+    hashedPwd = rows[0].password;
+  }
+
+  let pwdMatch = await bcrypt.compare(password, hashedPwd);
+  
+  if (pwdMatch) {
+    req.session.authenticated = true;
+    console.log(req.session.authenticated);
+    res.send({"authentication":"success"}); 
+ } else {
+   res.send({"authentication":"fail"}); 
+ }
+});
 
 app.get("/logout", function(req, res) {
   req.session.destroy()
