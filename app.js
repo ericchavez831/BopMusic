@@ -9,6 +9,8 @@ const pool = dbConnection();
 app.set("view engine", "ejs");
 app.use(express.static("public"));
 app.use(express.urlencoded({extended:true})); // to decode parameters that was send through post method 
+app.use(express.json());
+
 app.set('trust proxy', 1) // trust first proxy
 app.use(session({
   secret: 'topsecret',
@@ -16,6 +18,18 @@ app.use(session({
   saveUninitialized: true,
   cookie: { secure: true }
 }))
+
+
+function isAuthenticated(req, res, next){
+  console.log(req.session.authenticated);
+  if(!req.session.authenticated){
+    res.redirect('/');
+    // user is not authenticated
+  }
+  else{
+    next();
+  }
+}
 
 //routes
 app.get("/", async function(req, res){
@@ -75,12 +89,36 @@ app.post("/login", async function(req, res){
   
   if(pwdMatch){
     req.session.authenticated = true;
+    console.log(req.session.authenticated);
     res.render('home');
   }
   else{
     res.render('login', {'error':'wrong credentials'});
   }
 });
+
+// app.post("/api/login", async function(req, res){
+//   let username = req.body.username;
+//   let password = req.body.password;
+//   let hashedPwd = '';
+
+//   let sql = 'SELECT * FROM q_users WHERE username = ?';
+//   let rows = await executeSQL(sql, [username]);
+
+//   if(rows.length > 0){
+//     hashedPwd = rows[0].password;
+//   }
+
+//   let pwdMatch = await bcrypt.compare(password, hashedPwd);
+  
+//   if (pwdMatch) {
+//     req.session.authenticated = true;
+//     console.log(req.session.authenticated);
+//     res.send({"authentication":"success"}); 
+//  } else {
+//    res.send({"authentication":"fail"}); 
+//  }
+// });
 
 app.get("/logout", function(req, res) {
   req.session.destroy()
@@ -103,15 +141,7 @@ async function checkDuplicate(username){
   }
 }
 
-function isAuthenticated(req, res, next){
-  if(!req.session.authenicated){
-    res.redirect('/');
-    // user is not authenticated
-  }
-  else{
-    next();
-  }
-}
+
 
 async function executeSQL(sql, params){
   return new Promise (function (resolve, reject) {

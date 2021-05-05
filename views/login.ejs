@@ -8,18 +8,24 @@
 </head>
 <body>
     <h1>Login</h1>
-    <form action="/login" method="POST">
+    <form action="/login" method="POST"> -->
+
         Username:
         <input type="text" name="username"><br>
-        
+                         
         Password:
         <input type="password" name="password"><br>
     
         <button>Login</button>
-    </form>
+    
+        <h3 id="errorMessage"></h3>
+    
+    </form> -->
 
     <% if(typeof error != 'undefined'){%>
         <%= error %>
     <% } %>
+
+    <!--<script type="text/javascript" src="js/scripts.js"></script> -->
 </body>
 </html>
