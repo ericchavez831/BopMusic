@@ -8,20 +8,24 @@
     <title>Bop Music</title>
 </head>
 <body>
-<h1 class="text-center">Sign Up</h1>
+    <h1 class="text-center">Sign Up</h1>
 
-    <form method="POST" action="/signup">
+    <!-- <form method="POST" action="/signup"> -->
         <div class="text-center">
-        <input type="text" name="name" placeholder="Name"> <br>
-        <input type="text" name="username" placeholder="Username"> <br>
-        <input type="password" name="password" placeholder="Password"> <br>
-        <button>Sign Up</button>
+            <input type="text" id="name" placeholder="Name"> <br>
+            <input type="text" id="username" placeholder="Username"> <br>
+            <input type="password" id="password" placeholder="Password"> <br>
+            <button id="signup">Sign Up</button>
         </div>
-    </form>
+
+        <h3 id="errorMessage"></h3>
+    <!-- </form> -->
 
     <% if(typeof error != 'undefined'){%>
         <%= error %>
     <% } %>
+    
 
+    <script type="text/javascript" src="js/signupCheck.js"></script> -->
 </body>
 </html>
