@@ -30,75 +30,7 @@ app.get("/", async function(req, res){
 app.get("/login", async function(req, res){
   res.render("login");
 }); // login
-
-app.get("/signup", async function(req, res){
-
-  res.render("signup");
-}); // sign up
-
-app.post("/api/signup", async function(req, res){
-  // getting the values
-  let name = req.body.name;
-  let username = req.body.username;
-  let password = req.body.password;
-  let cd = await checkDuplicate(username);
-  let empty = isEmpty(name, username, password);
-  
-
-  // CHECK IF WE CAN CREATE THE ACCOUNT
-  if(cd || empty){
-    //res.render("signup", {"error": "Username already taken"});
-    res.send({"authentication":"fail"}); 
-  }else{
-    // ENCRYPT THE PASSWORD
-    let hashedPwd = await bcrypt.hash(password, 10);
-    let sql = "INSERT INTO q_users (name, username, password) VALUES (?, ?, ?)";
-    let params = [name, username, hashedPwd];
-    let rows = await executeSQL(sql, params);
-    
-    req.session.authenticated = true;
-    console.log(req.session.authenticated);
-    res.send({"authentication":"success"});
-    
-    
-    //res.render("login");
-  }
-
-}); // user/new
-
-app.get("/home", isAuthenticated, async function(req, res){
-  res.render("home");
-}); // home
-
-app.get("/create", isAuthenticated, async function(req, res){
-  res.render("create");
-}); // create
-
-app.post("/create", isAuthenticated, async function(req, res){
-  let activity_name = req.body.activity_name;
-  let description = req.body.description;
-  let city = req.body.city;
-  let state = req.body.state;
-  let date = req.body.date;
-  let duration = req.body.duration;
-  let type = req.body.type;
-  
-  let sql = "INSERT INTO q_activities (user_id, activity_name, description, city, state, date, duration, type) VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
-  let params =[global_userId, activity_name, description, city, state, date, duration, type];
-  let rows = await executeSQL(sql, params);
-  
-  res.render("create", {"message": "Activity Created!"});
-}); // create
-
-app.get("/explore", isAuthenticated, async function(req, res){
-  res.render("explore");
-}); // explore
-
-app.get("/profile", isAuthenticated, async function(req, res){
-  res.render("profile");
-}); // profile
-
-app.post("/api/login", async function(req, res){
+ app.post("/api/login", async function(req, res){
   let username = req.body.username;
   let password = req.body.password;
   let hashedPwd = '';
@@ -123,12 +55,142 @@ app.post("/api/login", async function(req, res){
  }
 });
 
+app.get("/signup", async function(req, res){
+
+  res.render("signup");
+}); // sign up
+
+app.post("/api/signup", async function(req, res){
+  // getting the values
+  let name = req.body.name;
+  let username = req.body.username;
+  let password = req.body.password;
+  let duplicate = await checkDuplicate(username);
+  let empty = isEmpty(name, username, password);
+  
+  console.log("duplicate" + duplicate);
+  console.log("empty" + empty);
+
+  // CHECK IF WE CAN CREATE THE ACCOUNT
+  if(duplicate || empty){
+    //res.render("signup", {"error": "Username already taken"});
+    res.send({"authentication":"fail"}); 
+  }else{
+    // ENCRYPT THE PASSWORD
+    let hashedPwd = await bcrypt.hash(password, 10);
+    let sql = "INSERT INTO q_users (name, username, password) VALUES (?, ?, ?)";
+    let params = [name, username, hashedPwd];
+    let rows = await executeSQL(sql, params);
+    
+    req.session.authenticated = true;
+    console.log(req.session.authenticated);
+    res.send({"authentication":"success"});
+    
+  }
+
 app.get("/logout", function(req, res) {
   global_userId = -1;
   console.log(global_userId);
   req.session.destroy();
   res.redirect("/")
 })
+
+
+
+
+
+
+}); // user/new
+
+app.get("/home", isAuthenticated, async function(req, res){
+  let sql = `SELECT * FROM q_activities WHERE user_id = ${global_userId}`;
+  let rows = await executeSQL(sql);
+  res.render("home", {"activities":rows});
+}); // home
+
+app.get("/create", isAuthenticated, async function(req, res){
+  res.render("create");
+}); // create
+
+app.post("/create", isAuthenticated, async function(req, res){
+  let activity_name = req.body.activity_name;
+  let description = req.body.description;
+  let city = req.body.city;
+  let state = req.body.state;
+  let date = req.body.date;
+  let duration = req.body.duration;
+  let type = req.body.type;
+  
+  let sql = "INSERT INTO q_activities (user_id, activity_name, description, city, state, date, duration, type) VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
+  let params =[global_userId, activity_name, description, city, state, date, duration, type];
+  let rows = await executeSQL(sql, params);
+  
+  res.render("create", {"message": "Activity Created!"});
+}); // create
+
+app.get("/explore", isAuthenticated, async function(req, res){
+
+  res.render("explore");
+}); // explore
+
+app.get("/profile", isAuthenticated, async function(req, res){
+  // we have the user global_userId so we have to natural join the tables and get the name, username, and password from db
+
+  let sql = `SELECT * FROM q_users WHERE user_id = ${global_userId}`;
+  let rows = await executeSQL(sql);
+
+  // To display the current info in the profile ejs file
+  res.render("profile", {'userInfo':rows});
+}); // profile
+
+app.post("/profile/edit", isAuthenticated, async function(req, res){
+
+  let password = req.body.password;
+  let name = req.body.name;
+  let username = req.body.username;
+  let duplicate = await checkDuplicate(username);
+  let empty = isEmpty(name, username, password);
+  let hashedPwd = password;
+  let sql = `SELECT * FROM q_users WHERE user_id = ${global_userId}`;
+  let rows1 = await executeSQL(sql);
+
+  if(duplicate || empty){
+    if(empty){
+      res.render('profile', {'userInfo':rows1, 'error':'One or more empty fields'}); 
+    }
+    else{
+      res.render('profile', {'userInfo':rows1, 'error':'Username already taken'}); 
+    }
+  }else{
+    // ENCRYPT THE PASSWORD
+    if(password.length < 20){
+      hashedPwd = await bcrypt.hash(password, 10);
+    }
+    let sql = `UPDATE q_users SET name = ?, username = ?, password = ? WHERE user_id = ${global_userId}`;
+
+    let params = [req.body.name, req.body.username, hashedPwd];
+    let rows = await executeSQL(sql, params);
+
+    res.render('profile', {'userInfo':rows1, 'error':'Succesfully updated profile'}); 
+  }
+  
+}); // profile/edit
+
+
+
+app.get("/admin", async function(req, res){
+  res.render("admin");
+}); // root route
+
+app.get("/users", async function(req, res){
+  res.render("users");
+}); // root route
+
+app.get("/activities", async function(req, res){
+  res.render("activities");
+}); // root route
+
+
 
 //functions ********************************************
 async function checkDuplicate(username){
@@ -145,11 +207,13 @@ async function checkDuplicate(username){
   }
 }
 
-async function isEmpty(name, username, password){
-  if(name == "" && username == "" && password == ""){
+function isEmpty(name, username, password){
+  if(name == "" || username == "" || password == ""){
     return true;
   }
-  return false;
+  else{
+    return false;
+  }
 }
 
 function isAuthenticated(req, res, next){

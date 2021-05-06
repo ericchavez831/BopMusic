@@ -22,7 +22,7 @@ async function signup(){
     console.log(data.authentication);
   
     if(data.authentication == "success"){
-      window.location.href = "/home";
+      window.location.href = "/login";
     }
     else{
       document.querySelector('#errorMessage').innerHTML = "Wrong Credentials";

@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
-    <title>repl.it</title>
+    <title>Home</title>
     <link href="css/styles.css" rel="stylesheet" type="text/css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   </head>
@@ -31,15 +31,37 @@
     <!-- All playlists
       Create some for loop to load all playlists; 
     -->
-    <figure id="loadList">
-      <!-- Image
-        holding a temp image for now
-       -->
-      <img src="https://www.tinypulse.com/hs-fs/hubfs/tiny-pulse-team-building-activities.jpg?width=1200&name=tiny-pulse-team-building-activities.jpg" width="100px" alt="Album picture">
 
-      <!-- Playlist Name -->
-      <figcaption>Some type of caption</figcaption>
-    </figure>
+    <table class="content-table">
+
+      <thead>
+        <tr>
+          <th>Activity Name</th>
+          <th>Type</th>
+          <th>City</th>
+          <th>State</th>
+          <th>Date</th>
+          <th>Time</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      
+      <tbody>
+        <% for(activity of activities) {%>
+          <tr class="active-row">
+            <td><%= activity.activity_name%></td>
+            <td>*TYPE*</td>
+            <td>*CITY*</td>
+            <td>*STATE*</td>
+            <td>*MM/DD/YYYY*</td>
+            <td>*00:00*</td>
+            <td>*Description*</td>
+          </tr>
+        <% } %>
+      </tbody>
+    
+    </table>
+    
 
     <div class="table-container">
       <button id="closeBtn">Close</button>

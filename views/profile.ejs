@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="css/styles.css" rel="stylesheet" type="text/css" />
+  <link href="/css/styles.css" rel="stylesheet" type="text/css" />
   <title>Profile Page</title>
 </head>
 <body>
   
-  <!-- Navigation Menu -->
+ <!-- Navigation Menu -->
   <nav>
     <h2 class="nav-mark1">Activity Planner</h2>
     <ul>
@@ -19,31 +19,34 @@
     </ul>
   </nav>
 
-  <!-- Title/Heading -->
+  <!-- Title/Heading  -->
   <h1>Profile Page</h1>
-  Username:
-  <input type="text" placeholder="Username" id="user"> <br>
-  Password:
-  <input type="text" placeholder="Password" id="pass"> <br>
-  Name:
-  <input type="text" placeholder="Name" id="name"> <br><br>
-<!-- 
-  <select>
-    <option>Select Type</option>
-    <option>Social</option>
-    <option>Cooking</option>
-    <option>Relaxation</option>
-  </select> <br> -->
+  <form method="POST" action="/profile/edit" id="form">
 
-  <button id="submitBtn">Submit</button> <br>
+    Username:
+    <input type="text" value="<%=userInfo[0].username%>" name="username"> <br>
+    Password:
+    <input type="password" value="<%=userInfo[0].password%>" name="password"> <br>
+    Name:
+    <input type="text" value="<%=userInfo[0].name%>" name="name"> <br><br>
 
-  <form action = "/logout">
-     <div class="buttons">
+    <button id="submitBtn">Submit</button> <br>
+
+    
+    <!-- 
+    <div class="buttons">
       <button id="login">
         Log out
       </button>
-     </div> 
-    </form> <br><br>
+    </div> -->
+    
+    <a class="txt-link" href="/logout">Log Out</a> <br><br>
+
+  </form>
+
+  <% if(typeof error != 'undefined'){%>
+        <%= error %>
+  <% } %>
 
 </body>
 </html>
