@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Admin Users View</title>
+    <link href="/css/styles.css" rel="stylesheet" type="text/css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  </head>
+  <body>
+
+    <nav>
+      <div class="logo-containter"><span id="logo">Activity.</span></div>
+      <ul>
+        <li><a class="txt-link" href="/admin">Home</a></li>
+        <li id="menu-item"><a class="txt-link" href="/users">Users</a></li>
+        <li><a class="txt-link" href="/activities">Activities</a></li>
+        <li><a class="txt-link" href="/admin/logout">Logout</a></li>
+      </ul>
+    </nav>
+
+ 
+
+    <div id="hideTable">
+      <div class="table-box">
+        <table class="content-table">
+          <thead>
+            <tr>
+              <th>Update</th>
+              <th>Delete</th>
+              <th>Name</th>
+              <th>Username</th>
+              <th>Password</th>
+            </tr>
+          </thead>
+          
+          <tbody>
+            <% for(user of users) {%>
+              <tr class="active-row">
+                <td><span class="admin-action"><a class="txt-link" href="/user/edit?user_id=<%=user.user_id%>"> UPDATE </a></span></td>
+                <td><span class="admin-action"><a href="#" class="deleteUser txt-link" userId="<%=user.user_id%>"> DELETE </a></span></td>
+                <td><%=user.name%></td>
+                <td><%=user.username%></td>
+                <td><%=user.password%></td>
+              </tr>
+            <% } %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <script type="text/javascript" src="js/userDelete.js"></script>
+  </body>
+</html>

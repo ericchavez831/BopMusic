@@ -3,14 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="css/styles.css" rel="stylesheet" type="text/css" />
+  <link href="/css/styles.css" rel="stylesheet" type="text/css" />
   <title>Create</title>
 </head>
 <body>
   
  <!-- Navigation Menu -->
   <nav>
-    <h2 class="nav-mark1">Activity Planner</h2>
+    <div class="logo-containter"><span id="logo">Activity.</span></div>
     <ul>
       <li><a class="txt-link" href="/home">Home</a></li>
       <li id="menu-item"><a class="txt-link" href="/create">Create</a></li>
@@ -19,35 +19,53 @@
     </ul>
   </nav>
 
-  <!-- Title/Heading -->
-  <h1>Plan an Activity</h1>
+  <div class="head-body">
+      <div class="stock-container">
+        <figure>
+          <img src="img/runnerIMG.png" alt="runner photo">
+        </figure>
+      </div>
+      <header>
+        <div class="header-container1">
+          <h1>Plan an Activity</h1>
+        </div>
+      </header>
+  </div>
 
+  <!-- Box to hold all cards -->
   <form method="POST" action="/create">
-    <input type="text" placeholder="Name of activity" name="activity_name"> <br>
-    <input type="text" placeholder="City" name="city"> <br>
-    <input type="text" placeholder="State" name="state"> <br>
-    <input type="date" placeholder="mm/dd/yyyy" name="date"> <br>
-    <input type="text" placeholder="Duration in minutes" name="duration"> <br>
-    <textarea rows="5" cols="30" placeholder="Description" name="description"></textarea> <br>
-    
-    <select name="type">
-      <option value="Social">Social</option>
-      <option value="Cooking">Cooking</option>
-      <option value="Relaxation">Relaxation</option>
-      <option value="Education">Education</option>
-      <option value="Charity">Charity</option>
-      <option value="Recreational">Recreational</option>
-      <option value="Music">Music</option>
-      <option value="Busy">Busy</option>
-      <option value="Diy">Diy</option>
-    </select> <br>
-    
-    <button id="submitBtn">Submit</button> <br>
+    <div class="card-grid2">
+      <div class="card-item">
+        <span class="card-title"><input size="50" class="input-container" type="text" placeholder="Name of activity" name="activity_name"> </span><br><br>
+          <div class="font-style-cursive">
+          <strong>Type:</strong> 
+          <select name="type">
+            <option value="Social">Social</option>
+            <option value="Cooking">Cooking</option>
+            <option value="Relaxation">Relaxation</option>
+            <option value="Education">Education</option>
+            <option value="Charity">Charity</option>
+            <option value="Recreational">Recreational</option>
+            <option value="Music">Music</option>
+            <option value="Busy">Busy</option>
+            <option value="Diy">Diy</option>
+          </select>  <br><br>
+          <strong>City:</strong> <input type="text" placeholder="City" name="city"> <br><br>
+          <strong>State:</strong> <input type="text" placeholder="State" name="state"> <br><br>
+          <strong>Date:</strong> <input type="date" placeholder="mm/dd/yyyy" name="date"> <br><br>
+          <strong>Length:</strong> <input type="text" placeholder="Duration in minutes" name="duration"> minute(s) <br><br>
+          <strong>Details:</strong> <textarea rows="5" cols="30" placeholder="Description" name="description"></textarea> 
+          <button id="submitBtn">Submit</button> <br>
+        </div>
+      </div>
+    </div>
   </form>
-
+  
   <% if(typeof message != 'undefined'){%>
-      <%= message %>
+    <%= message %>
   <% } %>
+
+  <br><br>
 
 </body>
 </html>

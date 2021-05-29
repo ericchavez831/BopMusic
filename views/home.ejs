@@ -53,7 +53,61 @@
             <td>*TYPE*</td>
             <td>*CITY*</td>
             <td>*STATE*</td>
-            <td>*MM/DD/YYYY*</td>
+            <td>*MM/DD/YYYY*</td><!DOCTYPE html>
+            <html>
+              <head>
+                <meta charset="utf-8">
+                <meta name="viewport" content="width=device-width">
+                <title>Home</title>
+                <link href="/css/styles.css" rel="stylesheet" type="text/css" />
+                <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+              </head>
+              <body>
+                
+                <!-- Navigation Menu -->
+                <nav>
+                  <div class="logo-containter"><span id="logo">Activity.</span></div>
+                  <ul>
+                    <li id="menu-item"><a class="txt-link" href="/home">Home</a></li>
+                    <li><a class="txt-link" href="/create">Create</a></li>
+                    <li><a class="txt-link" href="/explore">Explore</a></li>
+                    <li><a class="txt-link" href="/profile">Profile</a></li>
+                  </ul>
+                </nav>
+            
+                <div class="head-body">
+                  <header>
+                    <div class="header-container1">
+                      <h1>All of those fun activities listed down below</h1>
+                    <div>
+                  </header>
+                  <div class="stock-container">
+                    <figure>
+                      <img src="img/runnerIMG.png" alt="runner photo">
+                    </figure>
+                  </div>
+                </div>
+            
+            
+                <!-- Box to hold all cards -->
+                <div class="card-grid">
+                  <% for(activity of activities) {%>
+                    <div class="card-item">
+                      <span class="card-title"><%=activity.activity_name%></span><br><br>
+                        <div class="font-style-cursive">
+                        <strong>Type:</strong> <%=activity.type%> <br><br>
+                        <strong>City:</strong> <%=activity.city%> <br><br>
+                        <strong>State:</strong> <%=activity.state%> <br><br>
+                        <strong>Date:</strong> <%=activity.dateISO%> <br><br>
+                        <strong>Length:</strong> <%=activity.duration%> minute(s) <br><br>
+                        <strong>Details:</strong> <%=activity.description%> <br><br>
+                      </div>
+                    </div>
+                  <% } %>
+                </div>
+                
+              </body>
+            </html>
             <td>*00:00*</td>
             <td>*Description*</td>
           </tr>

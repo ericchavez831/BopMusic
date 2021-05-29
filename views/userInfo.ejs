@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+  <html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/css/styles.css" rel="stylesheet" type="text/css" />
+    <title>User Info</title>
+  </head>
+  <body>
+    <nav>
+      <div class="logo-containter"><span id="logo">Activity.</span></div>
+    </nav>
+
+    <div class="head-body">
+      <header>
+        <div class="header-container1">
+          <h1>Edit a User</h1>
+        <div>
+      </header>
+      <div class="stock-container">
+        <figure>
+          <img src="/img/runnerIMG.png" alt="runner photo">
+        </figure>
+      </div>
+    </div>
+
+    <form class="grid-container" method="POST" action="/user/edit" id="form">
+      <div class="b1">
+        <div class="cin-center">
+          Name: 
+          <input type="text" name="name" value="<%=userInfo[0].name%>">
+        </div>
+      </div>
+      
+      <div class="b2">
+        <div class="cin-center">
+          Username: 
+          <input type="text" name="username" value="<%=userInfo[0].username%>">
+        </div>
+      </div>
+      
+      <div class="b3">
+        <div class="cin-center">
+          Password: 
+          <input type="password" name="password" value="<%=userInfo[0].password%>">
+        </div>
+      </div>
+
+      <div class="b4">
+        <div class="cin-center">
+          <button>Update User</button>
+        </div>
+      </div>
+
+      <div class="b5">
+        <div class="cin-center">
+          <a href="/users">Back</a>
+        </div>
+      </div>
+
+      <input type="hidden" name="user_id" value="<%=userInfo[0].user_id%>">
+    </form><br>
+
+    
+
+    <% if(typeof error != 'undefined'){%>
+        <%= error %>
+    <% } %>
+
+  </body>
+</html>

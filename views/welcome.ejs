@@ -4,28 +4,36 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
     <title>Welcome</title>
-    <link href="css/styles.css" rel="stylesheet" type="text/css" />
+    <link href="/css/styles.css" rel="stylesheet" type="text/css" />
   </head>
-  <body>
-    <div>
-      <img src="https://www.transparentpng.com/thumb/music/musical-notes-png-clipart-pic-12.png" style="width:12em; height:13em;" id="image" />
-    </div><br><br>
+  <body class="txt-color">
+    <br><br><br><br>
+    <div class="activ"><span id="logo-font">Activity.</span></div>
+    <br><br>
     
     <form action = "/login">
      <div class="buttons">
-      <button id="login">
-        Log in
+      <button id="login" class="btn btn-sm btn-primary">
+        Login
       </button>
      </div> 
     </form> <br><br>
 
+    <form action = "/admin/login">
+     <div class="buttons">
+      <button id="signup" class="btn btn-sm btn-primary">
+        Admin Login
+      </button>
+     </div>
+    </form> <br><br>
+
     <form action = "/signup">
      <div class="buttons">
-      <button id="signup">
+      <button id="signup" class="btn btn-sm btn-primary">
         Sign up
       </button>
      </div>
-    </form>
+    </form> <br><br>
 
   </body>
 </html>

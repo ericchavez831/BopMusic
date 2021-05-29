@@ -10,7 +10,7 @@
   
  <!-- Navigation Menu -->
   <nav>
-    <h2 class="nav-mark1">Activity Planner</h2>
+    <!-- <h2 class="nav-mark1">Activity Planner</h2> -->
     <ul>
       <li><a class="txt-link" href="/home">Home</a></li>
       <li><a class="txt-link" href="/create">Create</a></li>
@@ -18,35 +18,61 @@
       <li id="menu-item"><a class="txt-link" href="/profile">Profile</a></li>
     </ul>
   </nav>
-
-  <!-- Title/Heading  -->
-  <h1>Profile Page</h1>
   <form method="POST" action="/profile/edit" id="form">
 
-    Username:
-    <input type="text" value="<%=userInfo[0].username%>" name="username"> <br>
-    Password:
-    <input type="password" value="<%=userInfo[0].password%>" name="password"> <br>
-    Name:
-    <input type="text" value="<%=userInfo[0].name%>" name="name"> <br><br>
-
-    <button id="submitBtn">Submit</button> <br>
-
-    
-    <!-- 
-    <div class="buttons">
-      <button id="login">
-        Log out
-      </button>
-    </div> -->
-    
-    <a class="txt-link" href="/logout">Log Out</a> <br><br>
-
+    <div class="profile-box">
+    <div class="col-xl-8 order-xl-1">
+      <div class="card bg-secondary shadow">
+        <div class="card-header bg-white border-0">
+          <div class="row align-items-center">
+            <div class="col-8">
+              <h3 class="mb-0">My profile</h3>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+            <h6 class="heading-small text-muted mb-4">User information</h6>
+              <div class="pl-lg-4">
+                <div class="row">
+                  <div class="col-lg-6">
+                    <div class="form-group focused">
+                    <label class="form-control-label" for="input-username">Username</label>
+                  <input type="text" value="<%=userInfo[0].username%>" name="username" class="form-control form-control-alternative"
+                  placeholder="Username">
+                </div>
+              </div>
+              <div class="col-lg-6">
+                <div class="form-group">
+                  <label class="form-control-label" for="input-email">Password</label>
+                  <input type="password" value="<%=userInfo[0].password%>" name="password" class="form-control form-control-alternative"
+                  placeholder="Password">
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-lg-6">
+                <div class="form-group focused">
+                  <label class="form-control-label" for="input-first-name"> Name</label>
+                  <input type="text" value="<%=userInfo[0].name%>" name="name" class="form-control form-control-alternative"
+                  placeholder="Name">
+                </div>
+              </div>
+              <div class="col-lg-6">
+                <button class="btn btn-sm btn-primary"> Submit </button>
+                <br><br><br>
+                <a id="atag" class="txt-link" href="/logout">Log Out</a> <br><br>
+              </div>
+            </div>
+          </div>
+  </div>
+  
   </form>
 
   <% if(typeof error != 'undefined'){%>
         <%= error %>
   <% } %>
+  <script type="text/javascript" src="/js/logout.js"></script>
 
 </body>
 </html>
+

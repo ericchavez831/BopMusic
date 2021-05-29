@@ -1,21 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="/css/styles.css" rel="stylesheet" type="text/css" />
-  <title>Profile Page</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/css/styles.css" rel="stylesheet" type="text/css" />
+    <title>Admin Login</title>
 </head>
-<body> <br><br>
-  
- <!-- Navigation Menu -->
+<body> <br> <br>
+    <!-- <form action="/login" method="POST"> -->
     <div class="profile-box">
-    <div class="col-xl-8 order-xl-1">
+      <div class="col-xl-8 order-xl-1">
       <div class="card bg-secondary shadow">
         <div class="card-header bg-white border-0">
           <div class="row align-items-center">
             <div class="col-8">
-              <h3 class="mb-0">Sign up</h3>
+              <h3 class="mb-0">Admin Login</h3>
             </div>
           </div>
         </div>
@@ -25,44 +25,44 @@
                 <div class="row">
                   <div class="col-lg-6">
                     <div class="form-group focused">
-                    <label class="form-control-label" for="input-username">Name</label>
-                  <input type="text" id="name" class="form-control form-control-alternative"
-                  placeholder="Name">
+                    <label class="form-control-label" for="input-username">Username</label>
+                  <input type="text" id="username" class="form-control form-control-alternative"
+                  placeholder="Username">
                 </div>
               </div>
               <div class="col-lg-6">
                 <div class="form-group">
-                  <label class="form-control-label" for="input-email">Username</label>
-                  <input type="text" id="username" class="form-control form-control-alternative"
-                  placeholder="Username">
+                  <label class="form-control-label" for="input-email">Password</label>
+                  <input type="password" id="password" class="form-control form-control-alternative"
+                  placeholder="Password">
                 </div>
               </div>
             </div>
             <div class="row">
               <div class="col-lg-6">
-                <div class="form-group focused">
-                  <label class="form-control-label" for="input-first-name"> Password</label>
-                  <input type="password" id="password" class="form-control form-control-alternative"
-                  placeholder="Password">
-                </div>
-              </div>
-              <div class="col-lg-6">
-                <button id="signup" class="btn btn-sm btn-primary"> Sign up </button>
-                <br><br>
+                <button id="adminLogin" class="btn btn-sm btn-primary"> Login </button>
+               <br><br>
               </div>
             </div>
           </div>
   </div>
+
     
-  <h3 id="errorMessage"></h3>
+    <!-- 
+    <div class="buttons">
+      <button id="login">
+        Log out
+      </button>
+    </div> -->
+    
+    <h3 id="errorMessage"></h3>
+  
+    <!-- </form> -->
 
     <% if(typeof error != 'undefined'){%>
         <%= error %>
     <% } %>
-    
 
-    <script type="text/javascript" src="js/signupCheck.js"></script>
-
+     <script type="text/javascript" src="/js/adminLoginCheck.js"></script>
 </body>
 </html>
-

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/css/styles.css" rel="stylesheet" type="text/css" />
+    <title>Profile Page</title>
+  </head>
+  <body>
+
+    <nav>
+      <div class="logo-containter"><span id="logo">Activity.</span></div>
+    </nav>
+
+    <div class="head-body">
+      <header>
+        <div class="header-container1">
+          <h1>Edit an Activity</h1>
+        <div>
+      </header>
+      <div class="stock-container">
+        <figure>
+          <img src="/img/runnerIMG.png" alt="runner photo">
+        </figure>
+      </div>
+    </div>
+
+    <form class="cin-wrapper" method="POST" action="/activity/edit" id="form">
+      <div class="t1">
+        <div class="cin-center">
+          Activity Name: 
+          <input type="text" name="activity_name" value="<%=activityInfo[0].activity_name%>">
+        </div>
+      </div>
+
+      <div class="t2">
+        <div class="cin-center">
+          City: 
+          <input type="text" name="city" value="<%=activityInfo[0].city%>">
+        </div>
+      </div>
+
+      <div class="t3">
+        <div class="cin-center">
+          State: 
+          <input type="text" name="state" value="<%=activityInfo[0].state%>">
+        </div>
+      </div>
+      
+      <div class="t4">
+        <div class="cin-center">
+          Date: 
+          <input type="date" name="date" value="<%=activityInfo[0].dateISO%>">
+        </div>
+      </div>
+      
+      <div class="t5">
+        <div class="cin-center">
+          Duration: 
+          <input type="text" name="duration" value="<%=activityInfo[0].duration%>">
+        </div>
+      </div>
+      
+      <div class="t6">
+        <div class="cin-center">
+          Type: 
+          <input type="text" name="type" value="<%=activityInfo[0].type%>">
+        </div>
+      </div>
+
+      <div class="t7">
+        <div class="cin-center">
+          <div>Description:</div> 
+          <textarea rows="5" cols="30" name="description" form="form" value="<%=activityInfo[0].description%>"><%=activityInfo[0].description%></textarea>
+        </div>
+      </div>
+      
+      <div class="t8">
+        <div class"cin-center">
+          <button>Update Activity</button>
+        </div>
+      </div>
+
+      <div class="t9">
+        <div class="cin-center">
+          <a href="/activities">Back</a>
+        </div>
+      </div>
+
+      <div>
+        <input type="hidden" name="activity_id" value="<%=activityInfo[0].activity_id%>">
+      </div>
+    </form><br>
+
+    <% if(typeof error != 'undefined'){%>
+        <%= error %>
+    <% } %>
+
+  </body>
+
+</html>
